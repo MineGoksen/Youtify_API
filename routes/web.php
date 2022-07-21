@@ -36,10 +36,7 @@ Route::get('/product/{id}', function ($id) {//parametre kullanimi
 });*/
 
 
-Route::get('/lists/{id}', function ($id) {//parametre kullanimi
-    $lists = \Illuminate\Support\Facades\DB::table('user_list')->where('Member_id','=',$id)->get();
-    return response()->json([$lists]);
-});
+Route::get('/lists/{id}', [\App\Http\Controllers\ListController::class,'getLists']);
 Route::get('/setUser', function () {
     //UserModel::query()->create()
     $model = new User();
@@ -47,10 +44,20 @@ Route::get('/setUser', function () {
     $model->password = Faker\Provider\Uuid::uuid();
     $model->first_name = Faker\Provider\Person::firstNameFemale();
     $model->last_name = "Kurtuluş";
-    $model->user_photo_path = \Faker\Provider\Image::imageUrl();
     $model->id_number = 423239862714;
     $model->save();
 });
+
+
+Route::post('listAdd',[\App\Http\Controllers\ListController::class,'addLists']);
+Route::post('userAdd',[\App\Http\Controllers\RegisterController::class,'signUp']);
+Route::post('login',[\App\Http\Controllers\RegisterController::class,'logIn']);
+Route::post('song_comment',[\App\Http\Controllers\SongController::class,'Comment']);
+Route::post('song_like',[\App\Http\Controllers\SongController::class,'like']);
+Route::post('song',[\App\Http\Controllers\SongController::class,'song']);
+Route::post('search',[\App\Http\Controllers\SearchController::class,'search']);
+
+
 Route::get('/setUserList', function () {
     //UserModel::query()->create()
     $model = new User();
@@ -58,7 +65,6 @@ Route::get('/setUserList', function () {
     $model->password = Faker\Provider\Uuid::uuid();
     $model->first_name = Faker\Provider\Person::firstNameFemale();
     $model->last_name = "Kurtuluş";
-    $model->user_photo_path = \Faker\Provider\Image::imageUrl();
     $model->id_number = 423239862714;
     $model->save();
 });

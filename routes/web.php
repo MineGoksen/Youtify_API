@@ -37,23 +37,14 @@ Route::get('/product/{id}', function ($id) {//parametre kullanimi
 
 
 Route::get('/lists/{id}', [\App\Http\Controllers\ListController::class,'getLists']);
-Route::get('/setUser', function () {
-    //UserModel::query()->create()
-    $model = new User();
-    $model->email = "maksimumm@gmail.com";
-    $model->password = Faker\Provider\Uuid::uuid();
-    $model->first_name = Faker\Provider\Person::firstNameFemale();
-    $model->last_name = "Kurtuluş";
-    $model->id_number = 423239862714;
-    $model->save();
-});
-
+Route::get('/getComment/{song_id}', [\App\Http\Controllers\SongController::class,'getComments']);
+Route::get('/getLikes/{song_id}', [\App\Http\Controllers\SongController::class,'getLikeNum']);
 
 Route::post('listAdd',[\App\Http\Controllers\ListController::class,'addLists']);
 Route::post('userAdd',[\App\Http\Controllers\RegisterController::class,'signUp']);
 Route::post('login',[\App\Http\Controllers\RegisterController::class,'logIn']);
-Route::post('song_comment',[\App\Http\Controllers\SongController::class,'Comment']);
-Route::post('song_like',[\App\Http\Controllers\SongController::class,'like']);
+Route::post('addComment',[\App\Http\Controllers\SongController::class,'addComment']);
+Route::post('song_like',[\App\Http\Controllers\SongController::class,'addLike']);
 Route::post('song',[\App\Http\Controllers\SongController::class,'song']);
 Route::post('search',[\App\Http\Controllers\SearchController::class,'search']);
 

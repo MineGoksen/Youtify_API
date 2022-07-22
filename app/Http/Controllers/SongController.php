@@ -28,7 +28,6 @@ class SongController extends Controller
             return response($response, 200);
         }
     }
-
     function like(Request $request)
     {
         $user_name = $request->get('user_name');

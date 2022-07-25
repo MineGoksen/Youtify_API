@@ -11,7 +11,8 @@ class ListController extends Controller
 
     function getLists($id ): \Illuminate\Http\JsonResponse
     {
-        $lists = \Illuminate\Support\Facades\DB::table('user_list')->where('Member_id','=',$id)->get();
+
+        $lists = \Illuminate\Support\Facades\DB::table('user_list')->where('Member_id','=',$id[0])->get();
         return response()->json([$lists]);
     }
     function addLists(Request $request )

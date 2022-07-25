@@ -19,7 +19,15 @@ class ListController extends Controller
         $list_name = $request->get('list_name');
         $user = $request->get("user_id");
       //  DB::insert('insert into user_list (Name,Member_id) values (?,?)',[$list_name,$user]);
-        DB::table('user_list')->insert(['Name'=>$list_name,'created_at'=>now(),'updated_at'=>now(),'Member_id'=>$user]);
+        $list_id=DB::table('user_list')->insertGetId(['Name'=>$list_name,'created_at'=>now(),'updated_at'=>now(),'Member_id'=>$user]);
+        $response = ['message' => 'You have been successfully add lists!','id'=>$list_id];
+        return response($response, 200);
+
+    }
+    function deleteLists(Request $request )
+    {
+        $id = $request->get('list_id');
+        DB::table('user_list')->where('id','=',$id)->delete();
         $response = ['message' => 'You have been successfully add lists!'];
         return response($response, 200);
 

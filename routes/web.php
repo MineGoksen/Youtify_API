@@ -2,7 +2,11 @@
 
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\ControllerNew;
+use App\Http\Controllers\ListController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SearchController;
+use App\Http\Controllers\SongController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,19 +40,20 @@ Route::get('/product/{id}', function ($id) {//parametre kullanimi
 });*/
 
 
-Route::get('/lists/{id}', [\App\Http\Controllers\ListController::class,'getLists']);
-Route::get('/getComment/{song_id}', [\App\Http\Controllers\SongController::class,'getComments']);
-Route::get('/getLikes/{song_id}', [\App\Http\Controllers\SongController::class,'getLikeNum']);
+Route::get('/lists/{id}', [ListController::class,'getLists']);
+Route::get('/getComment/{song_id}', [SongController::class,'getComments']);
+Route::get('/getLikes/{song_id}', [SongController::class,'getLikeNum']);
 
-Route::post('listAdd',[\App\Http\Controllers\ListController::class,'addLists']);
-Route::post('userAdd',[\App\Http\Controllers\RegisterController::class,'signUp']);
-Route::post('login',[\App\Http\Controllers\RegisterController::class,'logIn']);
-Route::post('addComment',[\App\Http\Controllers\SongController::class,'addComment']);
-Route::post('song_like',[\App\Http\Controllers\SongController::class,'addLike']);
-Route::post('song',[\App\Http\Controllers\SongController::class,'song']);
-Route::post('search',[\App\Http\Controllers\SearchController::class,'search']);
+Route::post('listAdd',[ListController::class,'addLists']);
+Route::post('listDelete',[ListController::class,'deleteLists']);
+Route::post('userAdd',[RegisterController::class,'signUp']);
+Route::post('login',[RegisterController::class,'logIn']);
+Route::post('addComment',[SongController::class,'addComment']);
+Route::post('song_like',[SongController::class,'addLike']);
+Route::post('song',[SongController::class,'song']);
+Route::post('search',[SearchController::class,'search']);
 
-
+/*
 Route::get('/setUserList', function () {
     //UserModel::query()->create()
     $model = new User();
@@ -70,9 +75,9 @@ Route::get('/new/{id}', [ControllerNew::class, 'show']);//laravel 8 de boyle yap
 
 Route::group(['namespace' => 'Controllers', 'prefix' => 'admin'], function () {
     Route::get('/', [AdminController::class, 'show']);
-});
+});*/
 
-
+/*
 ////////////////////////////////////////////////////////////////////
 Route::get('/users', function () {
     $users = \Illuminate\Support\Facades\DB::table('users')->get();
@@ -85,4 +90,4 @@ Route::get('/users', function () {
 
         });
     dd($first_user);//ekrana bastirmak icin
-});
+});*/

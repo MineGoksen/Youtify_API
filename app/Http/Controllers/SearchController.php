@@ -14,7 +14,7 @@ class SearchController extends Controller
         $posts = DB::table('song')
             ->where('Name', 'ilike', "%{$search}%")
             ->get();
-        $response = ['message' => 'You have been successfully search!',$posts];
+        $response = ['message' => 'You have been successfully search!',"songs"=>$posts];
         return response($response, 200);
 
     }

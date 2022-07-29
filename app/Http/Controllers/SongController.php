@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use phpDocumentor\Reflection\Types\True_;
 
 class SongController extends Controller
 {
@@ -18,13 +19,17 @@ class SongController extends Controller
         $exists = DB::table('user_song')->where('User_name', '=', $user_name)->
         where('Song_id', '=', $song_id)->exists();
         if (!$exists) {
+
             DB::table('user_song')->insert(['Comment_text' => $comment, 'User_name' => $user_name
-                , 'Song_id' => $song_id, 'created_at' => now(), 'updated_at' => now(), 'Like' => 0]);
+                , 'Song_id' => $song_id, 'created_at' => now(), 'updated_at' => now(), 'Like' =>false]);
             $response = ['message' => 'You have been successfully add comment!'];
         } else {
+            $like=DB::table('user_song')->where('User_name', '=', $user_name)->
+            where('Song_id', '=', $song_id)->get('Like');
+
             DB::table('user_song')->where('User_name', '=', $user_name)->
             where('Song_id', '=', $song_id)->update(['Comment_text' => $comment,
-                'updated_at' => now(), 'Like' => 0]);
+                'updated_at' => now(), 'Like' =>$like[0]->Like]);
             $response = ['message' => 'You have been successfully updated comment!'];
         }
         return response($response, 200);
@@ -33,18 +38,25 @@ class SongController extends Controller
     function addLike(Request $request)
     {
         $user_id = $request->get('user_id');
-        $user_id = $user_id[0]->user_id;
-        $user_name = DB::table('user')->where('id', '=', $user_id)->get('user_name');
+        $user_name = DB::table('user')->where('id', '=', (int)$user_id)->get('user_name');
 
         $user_name = $user_name[0]->user_name;
         $song_id = $request->get('song_id');
+        $exists = DB::table('user_song')->where('User_name', '=', $user_name)->
+        where('Song_id', '=', $song_id)->exists();
+        if ($exists) {
+            $like = DB::table('user_song')->where('User_name', '=', $user_name)->
+            where('Song_id', '=', $song_id)->get('Like');
 
-        $like = DB::table('user_song')->where('User_name', '=', $user_name)->
-        where('Song_id', '=', $song_id)->get('Like');
+            DB::table('user_song')->where('User_name', '=', $user_name)->
+            where('Song_id', '=', $song_id)->update(['Like' => !($like[0]->Like)]);
+            $response = ['message' => 'You have been successfully add song!',$like];
+        }else{
+            DB::table('user_song')->insert(['Comment_text' => "", 'User_name' => $user_name
+                , 'Song_id' => $song_id, 'created_at' => now(), 'updated_at' => now(), 'Like' =>true]);
+            $response = ['message' => 'You have been successfully add comment!'];
+        }
 
-        DB::table('user_song')->where('User_name', '=', $user_name)->
-        where('Song_id', '=', $song_id)->update(['Like' => !($like[0]->Like)]);
-        $response = ['message' => 'You have been successfully add song!'];
         return response($response, 200);
 
     }

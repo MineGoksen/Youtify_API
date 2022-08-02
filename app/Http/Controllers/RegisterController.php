@@ -31,6 +31,7 @@ class RegisterController extends Controller
         }
     }
 
+
     function logIn(Request $request)
     {
         $email = $request->get('email');

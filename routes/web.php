@@ -45,6 +45,7 @@ Route::get('/getComment/{song_id}', [SongController::class,'getComments']);
 Route::get('/getLikes/{song_id}', [SongController::class,'getLikeNum']);
 
 Route::post('listAdd',[ListController::class,'addLists']);
+Route::post('songAddToList',[SongController::class,'addSongToList']);
 Route::post('listDelete',[ListController::class,'deleteLists']);
 Route::post('listSongs',[ListController::class,'getListSongs']);
 Route::post('userAdd',[RegisterController::class,'signUp']);

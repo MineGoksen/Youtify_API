@@ -13,7 +13,6 @@ Route::get('/lists/{id}', [ListController::class,'getLists']);
 Route::get('/getComment/{song_id}', [SongController::class,'getComments']);
 Route::get('/songName/{song_id}', [SongController::class,'getSongName']);
 Route::get('/getLikes/{song_id}', [SongController::class,'getLikeNum']);
-
 Route::post('listAdd',[ListController::class,'addLists']);
 Route::post('songAddToList',[SongController::class,'addSongToList']);
 Route::post('listDelete',[ListController::class,'deleteLists']);

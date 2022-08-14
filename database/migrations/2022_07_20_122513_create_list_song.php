@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateListSong extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('list_song', function (Blueprint $table) {

@@ -4,13 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserSong extends Migration
-{
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+class CreateUserSong extends Migration{
     public function up()
     {
         Schema::create('user_song', function (Blueprint $table) {

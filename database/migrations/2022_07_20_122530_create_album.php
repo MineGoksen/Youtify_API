@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateAlbum extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('album', function (Blueprint $table) {

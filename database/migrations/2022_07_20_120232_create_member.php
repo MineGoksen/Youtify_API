@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateMember extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {//veritabanında tablonun oluşturulması isleminin kodları
         Schema::create('member', function (Blueprint $table) {

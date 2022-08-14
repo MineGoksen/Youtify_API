@@ -14,17 +14,17 @@ class CreateMember extends Migration
     public function up()
     {//veritabanında tablonun oluşturulması isleminin kodları
         Schema::create('member', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('Fname');
-            $table->string('Lname');
-            $table->string('email')->unique();
-            $table->string('password');
+            $table->increments('id')->primary();
+            $table->string('Fname')->nullable(false);
+            $table->string('Lname')->nullable(false);
+            $table->string('email')->unique()->nullable(false);
+            $table->string('password')->nullable(false);
             $table->timestamps();
         });
         Schema::create('user', function (Blueprint $table) {
             $table->unsignedBigInteger('id');
             $table->foreign('id')->references('id')->on('member');
-            $table->string('user_name')->unique();
+            $table->string('user_name')->unique()->nullable(false);
         });
 
         Schema::create('manager', function (Blueprint $table) {

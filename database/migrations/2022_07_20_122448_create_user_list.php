@@ -14,12 +14,11 @@ class CreateUserList extends Migration
     public function up()
     {
         Schema::create('user_list', function (Blueprint $table) {
-            $table->increments('List_id');
-            $table->timestamps();
+            $table->increments('id')->primary();
             $table->string('Name');
             $table->unsignedBigInteger('Member_id');
-            $table->date('Create_date');
             $table->foreign('Member_id')->references('id')->on('member');
+            $table->timestamps();
         });
     }
 

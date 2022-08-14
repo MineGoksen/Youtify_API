@@ -10,10 +10,9 @@ use PhpParser\Parser;
 class ListController extends Controller
 {
 
-    function getLists($id ): JsonResponse
+    function getLists($id )
     {
-
-        $lists = \Illuminate\Support\Facades\DB::table('user_list')->where('Member_id','=',$id[0])->get();
+        $lists = \Illuminate\Support\Facades\DB::table('user_list')->where('Member_id','=',$id)->get();
         return response()->json([$lists]);
     }
     function addLists(Request $request )

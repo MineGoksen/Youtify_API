@@ -82,7 +82,12 @@ class SongController extends Controller
         return response($response, 200);
 
     }
-
+    function getSongName($song_id): \Illuminate\Http\JsonResponse
+    {
+        $song = DB::table('song')->where('Song_id', '=', $song_id)->
+        get();
+        return response()->json($song);
+    }
     function getComments($song_id): \Illuminate\Http\JsonResponse
     {
         $comments = DB::table('user_song')->where('Song_id', '=', $song_id)->

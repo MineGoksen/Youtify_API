@@ -18,10 +18,10 @@ class RegisterController extends Controller
         $username_unique = DB::table('user')->where('user_name', '=', $user_name)->exists();
         if ($email_unique) {
             $response = ['message' => 'Bu email daha önce kullanılmış!'];
-            return response($response, 300);
+            return response($response, 210);
         } else if ($username_unique) {
             $response = ['message' => 'Bu kullanıcı adı daha önce kullanılmış!'];
-            return response($response, 300);
+            return response($response, 210);
         } else {
             $member_id = DB::table('member')->insertGetId(['Fname' => $f_name, 'Lname' => $l_name, 'email' => $email
                 , 'password' => $password, 'created_at' => now(), 'updated_at' => now()]);

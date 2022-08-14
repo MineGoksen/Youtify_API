@@ -31,7 +31,6 @@ class RegisterController extends Controller
         }
     }
 
-
     function logIn(Request $request)
     {
         $email = $request->get('email');
@@ -41,15 +40,7 @@ class RegisterController extends Controller
         if ($user->exists()) {
             $user_id = DB::table('member')->where('email', '=', $email)
                 ->where('password', '=', $password)->get('id');
-            $manager=DB::table('manager')->where('id', '=', $user_id[0]->id)->exists();
-            if ($manager){
-                $response = ['message' => 'You have been successfully add user!', 'id' => $user_id[0]->id,'manager'=>true];
-            }
-            else{
-                $response = ['message' => 'You have been successfully add user!', 'id' =>$user_id[0]->id,
-                    'manager'=>false];
-            }
-
+            $response = ['message' => 'You have been successfully add user!', 'id' => $user_id];
             return response($response, 200);
         } else {
             $user_exists = DB::table('member')->where('email', '=', $email)->exists();

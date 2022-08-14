@@ -96,15 +96,6 @@ class SongController extends Controller
             ->where('Like', '=', true)->get();
         return response()->json(['like_count' => sizeof($like_num)]);
     }
-    function addSongToList(Request $request)
-    {
-        $song_id= $request->get('song_id');
-        $list_id = $request->get('list_id');
-        DB::table('list_song')->insert(['List_id'=>$list_id,'created_at'=>now(),'updated_at'=>now(),'Song_id'=>$song_id]);
-        $response = ['message' => 'You have been successfully add lists!','id'=>$list_id];
-        return response($response, 200);
-
-    }
 
 
 }

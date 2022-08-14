@@ -6,21 +6,16 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateSong extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('song', function (Blueprint $table) {
-            $table->increments('Song_id');
-            $table->string('Type');
-            $table->string('Name');
-            $table->string('Artist_fname');
-            $table->string('Artist_lname');
-            $table->string('Album_name');
-            $table->date('Album_date');
+            $table->increments('Song_id')->primary();
+            $table->string('Type')->nullable(true);
+            $table->string('Name')->nullable(true);
+            $table->string('Artist_fname')->nullable(false);
+            $table->string('Artist_lname')->nullable(true);
+            $table->string('Album_name')->nullable(false);
+            $table->date('Album_date')->nullable(false);
             $table->foreign(['Album_name','Album_date'])->references(['Name','Date'])->on('album');
             $table->timestamps();
         });

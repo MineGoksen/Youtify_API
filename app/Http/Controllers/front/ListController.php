@@ -13,14 +13,14 @@ class ListController extends Controller
     function getLists($id ): JsonResponse
     {
 
-        $lists = \Illuminate\Support\Facades\DB::table('user_list')->where('Member_id','=',$id)->get();
+        $lists = \Illuminate\Support\Facades\DB::table('user_list')->where('Member_id','=',$id[0])->get();
         return response()->json([$lists]);
     }
     function addLists(Request $request )
     {
         $list_name = $request->get('list_name');
         $user = $request->get("user_id");
-        //  DB::insert('insert into user_list (Name,Member_id) values (?,?)',[$list_name,$user]);
+      //  DB::insert('insert into user_list (Name,Member_id) values (?,?)',[$list_name,$user]);
         $list_id=DB::table('user_list')->insertGetId(['Name'=>$list_name,'created_at'=>now(),'updated_at'=>now(),'Member_id'=>$user]);
         $response = ['message' => 'You have been successfully add lists!','id'=>$list_id];
         return response($response, 200);
@@ -29,7 +29,6 @@ class ListController extends Controller
     function deleteLists(Request $request )
     {
         $id = $request->get('list_id');
-        DB::table('list_song')->where('List_id','=',$id)->delete();
         DB::table('user_list')->where('id','=',$id)->delete();
         $response = ['message' => 'You have been successfully add lists!'];
         return response($response, 200);

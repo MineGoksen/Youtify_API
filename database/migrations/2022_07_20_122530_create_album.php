@@ -6,16 +6,11 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateAlbum extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('album', function (Blueprint $table) {
-            $table->string('Name');
-            $table->date('Date');
+            $table->string('Name')->nullable(false);
+            $table->date('Date')->nullable(false);
             $table->timestamps();
             $table->primary(array('Name', 'Date'));
         });

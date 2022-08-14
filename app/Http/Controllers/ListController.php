@@ -9,7 +9,6 @@ use PhpParser\Parser;
 
 class ListController extends Controller
 {
-
     function getLists($id )
     {
         $lists = \Illuminate\Support\Facades\DB::table('user_list')->where('Member_id','=',$id)->get();

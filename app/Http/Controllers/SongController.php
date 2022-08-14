@@ -13,7 +13,6 @@ class SongController extends Controller
         $user_id = $request->get('user_id');
         $user_name = DB::table('user')->where('id', '=', $user_id)->get('user_name');
 
-
         $user_name = $user_name[0]->user_name;
         $song_id = $request->get('song_id');
         $exists = DB::table('user_song')->where('User_name', '=', $user_name)->
